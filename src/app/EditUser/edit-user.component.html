@@ -1,0 +1,30 @@
+<h2 mat-dialog-title class="text-center">Editar Usuario</h2>
+<form [formGroup]="editForm" style="padding: 20px;">
+  <div class="mx-auto">
+    <div class="form-floating mb-3">
+      <input matInput formControlName="nombres" placeholder="Nombres" id="floatingNombres" class="form-control">
+      <label for="floatingNombres" class="form-label">Nombres</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input matInput formControlName="apellidos" placeholder="Apellidos" id="floatingApellidos" class="form-control">
+      <label for="floatingApellidos" class="form-label">Apellidos</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input matInput formControlName="email" placeholder="Email" id="floatingEmail" class="form-control">
+      <label for="floatingEmail" class="form-label">Email</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input matInput formControlName="celular" placeholder="Celular" id="floatingCelular" class="form-control">
+      <label for="floatingCelular" class="form-label">Celular</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input type="file" (change)="handleFileInput($event)" formControlName="foto" id="floatingFoto" class="form-control">
+      <label for="floatingFoto" class="form-label">Foto</label>
+    </div>
+  </div>
+
+  <div mat-dialog-actions class="d-flex justify-content-center">
+    <button (click)="onCancelClick()" class="btn btn-danger mx-2">Cancelar</button>
+    <button mat-raised-button (click)="onSaveClick()" class="btn btn-success mx-2">Guardar</button>
+  </div>
+</form>
