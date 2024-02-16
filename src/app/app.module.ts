@@ -14,7 +14,7 @@ import { MatIconButton } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { DeleteUserComponent } from './DeleteUser/delete-user.component';

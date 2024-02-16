@@ -8,7 +8,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   max-height: 50px;
 }
 
-
 .icon-button {
   background-color: transparent;
   border: none;
@@ -22,7 +21,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .button-container {
   display: flex;
   align-items: center;
-  gap: 8px; /* Ajusta el espacio entre los botones según tus preferencias */
+  gap: 8px;
 }
 
 .delete-button {
@@ -39,26 +38,26 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .delete-button::before {
-  content: '\2022'; /* Código Unicode para un círculo */
-  font-size: 13.8rem; /* Ajusta el tamaño según tus preferencias */
+  content: '\2022';
+  font-size: 13.8rem;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 1.5rem; /* Ajusta el ancho del círculo según tus preferencias */
-  height: 1.5rem; /* Ajusta la altura del círculo según tus preferencias */
-  border-radius: 50%; /* Hace que la forma sea un círculo perfecto */
-  background-color: rgb(241, 241, 241); /* Ajusta el color y la opacidad según tus preferencias */
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background-color: rgb(241, 241, 241);
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0; /* Inicialmente oculto */
-  transition: opacity 0.3s ease; /* Agregamos una transición para suavizar el efecto */
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .delete-button:hover::before {
-  opacity: 0.05; /* Mostrar la sombra al pasar el ratón por encima */
-  margin-top: 5px; /* Ajusta el valor para bajar la sombra */
+  opacity: 0.05;
+  margin-top: 5px;
 }
 
 

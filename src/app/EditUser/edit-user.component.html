@@ -4,18 +4,22 @@
     <div class="form-floating mb-3">
       <input matInput formControlName="nombres" placeholder="Nombres" id="floatingNombres" class="form-control">
       <label for="floatingNombres" class="form-label">Nombres</label>
+     <mat-error *ngIf="editForm.get('nombres')?.invalid && editForm.get('nombres')?.touched">El campo nombres es requerido</mat-error>
     </div>
     <div class="form-floating mb-3">
       <input matInput formControlName="apellidos" placeholder="Apellidos" id="floatingApellidos" class="form-control">
       <label for="floatingApellidos" class="form-label">Apellidos</label>
+      <mat-error *ngIf="editForm.get('apellidos')?.invalid && editForm.get('apellidos')?.touched">El campo apellidos es requerido</mat-error>
     </div>
     <div class="form-floating mb-3">
       <input matInput formControlName="email" placeholder="Email" id="floatingEmail" class="form-control">
       <label for="floatingEmail" class="form-label">Email</label>
+      <mat-error *ngIf="editForm.get('email')?.invalid && editForm.get('email')?.touched && editForm.get('email')?.hasError('email')">El campo email es requerido y/o el formato es invalido</mat-error>
     </div>
     <div class="form-floating mb-3">
       <input matInput formControlName="celular" placeholder="Celular" id="floatingCelular" class="form-control">
       <label for="floatingCelular" class="form-label">Celular</label>
+      <mat-error *ngIf="editForm.get('celular')?.invalid && editForm.get('celular')?.touched && editForm.get('celular')?.hasError('pattern')">El campo celular es requerido y/o el formato es invalido</mat-error>
     </div>
     <div class="form-floating mb-3">
       <input type="file" (change)="handleFileInput($event)" formControlName="foto" id="floatingFoto" class="form-control">

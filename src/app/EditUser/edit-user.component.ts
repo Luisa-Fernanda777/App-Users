@@ -2,9 +2,10 @@ import { Component, Inject, ViewChild, ElementRef } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { UserDataService } from '../user-data.service';
 import { User } from '../models/user.models';
-import { catchError, finalize, lastValueFrom, of } from 'rxjs';
+import { catchError, finalize, of } from 'rxjs';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
+const PHONE_VALIDATOR = /^[0-9+\-]*$/;
 
 @Component({
   selector: 'app-edit-user',
@@ -30,8 +31,8 @@ export class EditUserComponent {
     this.editForm = this.formBuilder.group({
       nombres: [this.userData.nombres , Validators.required],
       apellidos: [this.userData.apellidos , Validators.required],
-      email: [this.userData.email , Validators.required],
-      celular: [this.userData.celular , Validators.required],
+      email: [this.userData.email , [Validators.required, Validators.email]],
+      celular: [this.userData.celular , [Validators.required, Validators.pattern(PHONE_VALIDATOR)]],
       foto: [this.userData.foto]
     })
   }
@@ -47,6 +48,16 @@ export class EditUserComponent {
     const file = event.target.files[0];
 
     if (file) {
+      if(file.size > 1048576){
+        alert('Error al editar el usuario, limite 1MB');
+        event.target.value ='';
+        return;
+      }
+      if(file.type.split('/')[0] !== 'image'){
+        alert('Error al editar el usuario, tipo de archivo no admitido');
+        event.target.value ='';
+        return;
+      }
       this.convertImageToBase64(file);
     }
   }
@@ -56,7 +67,6 @@ export class EditUserComponent {
       const reader = new FileReader();
 
       reader.readAsDataURL(file);
-
       reader.onloadend = () => {
         this.baseImage64 = reader.result;
       };
@@ -71,12 +81,17 @@ export class EditUserComponent {
     }
     this.loading = true;
     const editedUserData = this.editForm.value;
-    editedUserData.foto = this.baseImage64 as string;
+
+    if (this.baseImage64) {
+      editedUserData.foto = this.baseImage64 as string;
+    } else {    // Si no selecciona una nueva foto entonces conserva la foto preexistente
+      editedUserData.foto = this.userData.foto;
+    }
 
     this.userDataService.updateUserData(editedUserData, this.userData.id)
     .pipe(
       catchError((error) => {
-        console.log('Error en la edicion de usuario', error);
+        alert('Error Inesperado');
         return of(null);
       }),
       finalize(() => {
@@ -85,11 +100,9 @@ export class EditUserComponent {
     )
     .subscribe(editedUser => {
       if(editedUser) {
-        console.log('Usuario editado', editedUser);
         this.dialogRef.close(editedUser);
-        //window.location.reload();
       } else {
-        console.error('Usuario no editado');
+        alert('No fue posible editar el usuario');
       }
     });
     }
